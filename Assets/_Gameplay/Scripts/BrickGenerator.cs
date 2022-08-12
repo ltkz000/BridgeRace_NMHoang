@@ -9,8 +9,8 @@ public class BrickGenerator : MonoBehaviour
     private Vector3 startPoint;
     private Vector3 position;
 
-    private int  length = 24;
-    private int line = 6;
+    private int  length = 40;
+    private int line = 8;
     private int xOrder = 0;
     [SerializeField] private float brickDistance;
 
@@ -88,5 +88,28 @@ public class BrickGenerator : MonoBehaviour
         temp.isRemoved = false;
 
         spawnedBricks[i] = temp;
+    }
+
+    public void RemovePickedBrick(int brickNumber)
+    {
+        spawnedBricks[brickNumber].isRemoved = true;
+    }
+
+    public void GeneratedRemovedBrick()
+    {
+        for(int i = 0; i < length; i++)
+        {
+            if(spawnedBricks[i].isRemoved == true)
+            {
+                Transform createdBrick = Instantiate(brickPrefab, spawnedBricks[i].position, brickPrefab.rotation, transform);
+
+                createdBrick.GetComponent<Renderer>().material.SetColor("_Color", spawnedBricks[i].color);
+                createdBrick.GetComponent<Brick>().colorName = spawnedBricks[i].colorName;
+                createdBrick.GetComponent<Brick>().brickNumber = i;
+
+                spawnedBricks[i].isRemoved = false;
+                return;
+            }
+        }
     }
 }

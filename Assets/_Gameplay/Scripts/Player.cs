@@ -9,22 +9,16 @@ public class Player : MonoBehaviour
     public Animator animator;
     [SerializeField] private Transform playerModel;
     [SerializeField] private float playerSpeed = 2.0f;
-    [SerializeField] private Transform brickHolder;
-
     // [SerializeField] private float rotationSpeed;
     // Variables
     // private float currentGravity;
     private Vector3 move;
-    private int brickCount;
-    public string playerColor;
     [SerializeField] private bool isBot;
 
     private void Awake() 
     {
         playerInput = new PlayerInput();
         controller = GetComponent<CharacterController>();
-
-        brickCount = 0;
         // currentGravity = .0f;
     }
 
@@ -82,16 +76,5 @@ public class Player : MonoBehaviour
     //         currentGravity = -9.8f;
     //     }   
     // }
-
-    private void OnTriggerEnter(Collider other) {
-        // Brick brick = other.transform.GetComponent<Brick>();
-        Debug.Log("Enter");
-        
-        Vector3 currentpositon = other.transform.position;
-        Vector3 nextpositon = brickHolder.position;
-
-        other.transform.position = Vector3.Lerp(currentpositon, nextpositon, Time.deltaTime);
-        other.transform.SetParent(brickHolder);
-    }
 }
 

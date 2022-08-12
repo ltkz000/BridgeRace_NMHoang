@@ -4,10 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - BrickRed
-  - BrickBlue
-  - BrickYellow
-  - BrickGreen
+  - Bridge
+  - Test
   layers:
   - Default
   - TransparentFX
