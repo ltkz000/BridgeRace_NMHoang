@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BrickController : MonoBehaviour
+public class PlayerBrickController : MonoBehaviour
 {
     [SerializeField] private BrickGenerator brickGenerator;
     private BotController botController;
@@ -40,7 +40,6 @@ public class BrickController : MonoBehaviour
     private void FixedUpdate() 
     {
         CheckBridge();
-        Debug.Log("brickCount - " + brickCount);
     }
 
     private void CheckBridge()

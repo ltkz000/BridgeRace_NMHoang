@@ -62,19 +62,5 @@ public class Player : MonoBehaviour
             animator.SetBool("isRunning", false);
         }
     }
-
-    // private void gravityHandle()
-    // {
-    //     if(controller.isGrounded)
-    //     {
-    //         // float groundedGravity = -.05f;
-    //         currentGravity = .0f;
-    //     }
-    //     else
-    //     {
-    //         // float gravity = -9.8f;
-    //         currentGravity = -9.8f;
-    //     }   
-    // }
 }
 
