@@ -4,41 +4,58 @@ using UnityEngine;
 
 public class CollectController : MonoBehaviour
 {
-    private PlayerBrickController playerBrickController; 
-    private BotController botController;
+    [SerializeField] private PlayerBrickController playerBrickController; 
+    [SerializeField] private Pooling spawnerPooling;
     [SerializeField] private BrickGenerator brickGenerator;
-    [SerializeField] private Transform playerModel;
-    [SerializeField] private Transform brickHolder;
-    [SerializeField] private bool isBot;
-
+    Stage currentStage;
+    LevelManager ins;
     public string playerColorName;
 
     private void Start() 
     {
-        playerBrickController = GetComponent<PlayerBrickController>();    
-        
-        if(isBot)
-        {
-            botController = GetComponent<BotController>();
-        }
+        currentStage = Stage.Stage1;
+        ins = LevelManager.Ins;    
+    }
+
+    private void Update() 
+    {
+        Debug.Log(currentStage.ToString());
     }
 
     private void OnTriggerEnter(Collider other) {
-        Brick brick = other.transform.GetComponent<Brick>();
-        Debug.Log("Bot test");
+        if(other.CompareTag("Stage1"))
+        {
+            currentStage = ins.switchStage(1);
+            brickGenerator = ins.ChooseSpawner(currentStage);
+            // brickGenerator.GeneratedRemovedBrick();
+        }
+        else if(other.CompareTag("Stage2"))
+        {
+            currentStage = ins.switchStage(2);
+            brickGenerator = ins.ChooseSpawner(currentStage);
+            // brickGenerator.GeneratedRemovedBrick();
+        }
+        else if(other.CompareTag("Stage3"))
+        {
+            currentStage = ins.switchStage(3);
+            brickGenerator = ins.ChooseSpawner(currentStage);
+            // brickGenerator.GeneratedRemovedBrick();
+        }
+        else
+        {
+            Brick brick = other.transform.GetComponent<Brick>();
         
-        if(brick.colorName == playerColorName)
-        {
-            Debug.Log("Bot brick");
-            brickGenerator.RemovePickedBrick(brick.brickNumber);
-            Destroy(other.gameObject);
-            playerBrickController.UpdateBrickHolder();
+            if(brick.colorName == playerColorName)
+            {
+                brickGenerator.RemovePickedBrick(brick.brickNumber);
+                spawnerPooling.ReturnObject(other.gameObject);
+                playerBrickController.UpdateBrickHolder();
+            }
         }
+    }
 
-        if(isBot)
-        {
-            botController.CollectBrick();
-            Debug.Log("Bot entered");
-        }
+    private void OnCollisionEnter(Collision other)
+    {
+        
     }
 }

@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBrickController : MonoBehaviour
+public class BotBrickControll : MonoBehaviour
 {
+    [SerializeField] BotControll botControll;
     [SerializeField] private BrickGenerator brickGenerator;
-    private BotController botController;
     [SerializeField] private Transform brideWay;
     [SerializeField] private Transform playerModel;
     [SerializeField] private Transform carryPoint;
+    private Pooling poolingCarryPoint;
     [SerializeField] private Transform placePoint;
     [SerializeField] private Transform placeBrickHolder;
-    [SerializeField] private Transform normalBrick;
+    private Pooling poolingPlacedBrick;
     [SerializeField] private Transform placedBrickPrefab;
-    [SerializeField] private bool isBot;
 
 
     private float placedBrickSizey, placedBrickSizez;
@@ -23,22 +23,17 @@ public class PlayerBrickController : MonoBehaviour
     private int placedBrickCount;
     private Vector3 bridgePos;
 
-
-    private void Start() 
+    // Start is called before the first frame update
+    private void Start()
     {
-        // brickGenerator = FindObjectOfType<BrickGenerator>();
+        poolingCarryPoint = carryPoint.GetComponent<Pooling>();
+        poolingPlacedBrick = placeBrickHolder.GetComponent<Pooling>();
 
         placedBrickSizey = placedBrickPrefab.GetComponent<Renderer>().bounds.size.y;
         placedBrickSizez = placedBrickPrefab.GetComponent<Renderer>().bounds.size.z;
-
-        if(isBot)
-        {
-            botController = gameObject.GetComponent<BotController>();
-        }
     }
 
-    private void FixedUpdate() 
-    {
+    private void FixedUpdate() {
         CheckBridge();
     }
 
@@ -48,12 +43,8 @@ public class PlayerBrickController : MonoBehaviour
         if(Physics.Raycast(placePoint.position, playerModel.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
         {
             Debug.DrawRay(placePoint.position, playerModel.TransformDirection(Vector3.down) * hit.distance, Color.magenta);
-            PlacedBrick checkBrick = hit.collider.GetComponent<PlacedBrick>();
 
-            // if(hit.collider.CompareTag("Test"))
-            // {
-            //     hit.collider.GetComponent<ColliderTest>().TurnColliOn();
-            // }
+            PlacedBrick checkBrick = hit.collider.GetComponent<PlacedBrick>();
 
             if(hit.collider.CompareTag("Bridge"))
             {
@@ -63,13 +54,10 @@ public class PlayerBrickController : MonoBehaviour
                 }
                 else
                 {
-                    if(isBot)
-                    {
-                        botController.Place_CollectBrick();
-                    }
-                    placedBrickCount = hit.collider.GetComponent<BridgeWay>().bricksPlaced;
+                    botControll.Place_CollectBrick();
                     hit.collider.GetComponent<BridgeWay>().TurnOnStartWall();
-                    // BlockFallOff(hit);
+
+                    placedBrickCount = hit.collider.GetComponent<BridgeWay>().bricksPlaced;
                 }
             }
             else
@@ -95,15 +83,18 @@ public class PlayerBrickController : MonoBehaviour
     public void UpdateBrickHolder()
     {
         Vector3 newPositon = new Vector3(carryPoint.position.x, carryPoint.position.y + brickCount*0.05f, carryPoint.position.z);
-        Transform brick = Instantiate(normalBrick, newPositon, playerModel.rotation, carryPoint);
+        GameObject brick = poolingCarryPoint.GetObject();
+        brick.transform.position = newPositon;
+        brick.transform.rotation = playerModel.rotation;
         brick.GetComponent<Renderer>().material.SetColor("_Color", selectedColor);
+        brick.SetActive(true);
         brickCount++;
     }
 
     private void RemovedTopBrick()
     {
-        GameObject lastChild = carryPoint.GetChild(brickCount - 1).gameObject;
-        Destroy(lastChild);
+        GameObject lastChild = carryPoint.GetChild(carryPoint.childCount - brickCount).gameObject;
+        poolingCarryPoint.ReturnObject(lastChild);
         brickCount--;
     }
 
@@ -115,32 +106,19 @@ public class PlayerBrickController : MonoBehaviour
 
         Vector3 placeBrickPos = new Vector3(bridgePos.x, bridgePos.y + (placedBrickCount * placedBrickSizey), 
                                                 bridgePos.z + (placedBrickCount * placedBrickSizez) - 1.025f);
-        // Vector3 placeBrickPos = bridgePos;
 
-        Transform placedBrick = Instantiate(placedBrickPrefab, placeBrickPos, placedBrickPrefab.rotation, placeBrickHolder);
-
+        GameObject placedBrick = poolingPlacedBrick.GetObject();
+        placedBrick.transform.position = placeBrickPos;
         placedBrick.GetComponent<Renderer>().material.SetColor("_Color", selectedColor);
         placedBrick.GetComponent<PlacedBrick>().colorName = selectedColorName;
+        placedBrick.SetActive(true);
 
         hit.collider.GetComponent<BridgeWay>().bricksPlaced++;
 
         RemovedTopBrick();
 
         brickGenerator.GeneratedRemovedBrick();
-
-        Debug.Log("placeBrickPos: " + placeBrickPos);
-        hit.collider.GetComponent<BridgeWay>().MoveStartWall(placeBrickPos + new Vector3(.0f, .0f, 0.6f));
-
-        if(isBot)
-        {
-            botController.UpdateMesh();
-        }
     }
-
-    // private void checkStage(RaycastHit hit)
-    // {
-
-    // }
 
     private void BlockMoveOnOtherBrick(RaycastHit hit)
     {
@@ -151,17 +129,6 @@ public class PlayerBrickController : MonoBehaviour
 
     private void ReplaceOtherBrick(RaycastHit hit)
     {
-        Vector3 newBrickPos = hit.transform.position;
 
-        Destroy(hit.collider.gameObject);
-
-        Transform newBrick = Instantiate(placedBrickPrefab, newBrickPos, placedBrickPrefab.transform.rotation, placeBrickHolder);
-
-        newBrick.GetComponent<Renderer>().material.SetColor("_Color", selectedColor);
-        newBrick.GetComponent<PlacedBrick>().colorName = selectedColorName;
-
-        RemovedTopBrick();
-
-        brickGenerator.GeneratedRemovedBrick();
     }
 }

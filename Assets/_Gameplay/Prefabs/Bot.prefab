@@ -1193,10 +1193,6 @@ GameObject:
   - component: {fileID: 6574948962089254275}
   - component: {fileID: 999453777492371449}
   - component: {fileID: 1975027204854311892}
-  - component: {fileID: 8985538614025543265}
-  - component: {fileID: 1892711226835790511}
-  - component: {fileID: 8185116453173275422}
-  - component: {fileID: 8929047544448211525}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Untagged
@@ -1257,79 +1253,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!195 &8985538614025543265
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5797603395864323897}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.14
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 0.28
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &1892711226835790511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5797603395864323897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ad1a2c7ccc2d714cb2d27e6b38f247a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 8985538614025543265}
---- !u!114 &8185116453173275422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5797603395864323897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 566c625eda727e0409d914dc3c3847a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brickGenerator: {fileID: 0}
-  playerModel: {fileID: 2850282049314286877}
-  brickHolder: {fileID: 8850792474279870311}
-  isBot: 0
-  playerColorName: 
---- !u!114 &8929047544448211525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5797603395864323897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b15f1398acc5153448d172e5891efa84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerModel: {fileID: 2850282049314286877}
-  carryPoint: {fileID: 8850792474279870311}
-  placePoint: {fileID: 7734195681191308398}
-  placeBrickHolder: {fileID: 0}
-  normalBrick: {fileID: 1074281666733097145, guid: 450ab9416c6fcb24cbffb8c1fed92173, type: 3}
-  placedBrickPrefab: {fileID: 5302839993543362414, guid: 9fcf8e229ba719a48a46b15db4eec430, type: 3}
-  isBot: 1
-  selectedColor: {r: 0, g: 0, b: 0, a: 0}
-  selectedColorName: 
 --- !u!1 &5838347078266136652
 GameObject:
   m_ObjectHideFlags: 0

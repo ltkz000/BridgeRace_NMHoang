@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BrickController : MonoBehaviour
+public class PlayerBrickController : MonoBehaviour
 {
-    [SerializeField] private BrickGenerator brickGenerator;
-    private BotController botController;
-    [SerializeField] private Transform brideWay;
+    [SerializeField] private GameObject brideWay;
     [SerializeField] private Transform playerModel;
     [SerializeField] private Transform carryPoint;
+    private Pooling poolingCarryPoint;
     [SerializeField] private Transform placePoint;
     [SerializeField] private Transform placeBrickHolder;
-    [SerializeField] private Transform normalBrick;
+    private Pooling poolingPlacedBrick;
     [SerializeField] private Transform placedBrickPrefab;
-    [SerializeField] private bool isBot;
+    private Stage currentStage;
+    private BrickGenerator brickGenerator;
+    LevelManager ins;
 
 
     private float placedBrickSizey, placedBrickSizez;
@@ -26,21 +27,37 @@ public class BrickController : MonoBehaviour
 
     private void Start() 
     {
-        // brickGenerator = FindObjectOfType<BrickGenerator>();
+        ins = LevelManager.Ins;
+        currentStage = Stage.Stage1;
+        brickGenerator = FindObjectOfType<BrickGenerator>();
+        poolingCarryPoint = carryPoint.GetComponent<Pooling>();
+        poolingPlacedBrick = placeBrickHolder.GetComponent<Pooling>();
 
         placedBrickSizey = placedBrickPrefab.GetComponent<Renderer>().bounds.size.y;
         placedBrickSizez = placedBrickPrefab.GetComponent<Renderer>().bounds.size.z;
-
-        if(isBot)
-        {
-            botController = gameObject.GetComponent<BotController>();
-        }
     }
 
     private void FixedUpdate() 
     {
         CheckBridge();
-        Debug.Log("brickCount - " + brickCount);
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if(other.CompareTag("Stage1"))
+        {
+            currentStage = ins.switchStage(1);
+            brickGenerator = ins.ChooseSpawner(currentStage);
+        }
+        else if(other.CompareTag("Stage2"))
+        {
+            currentStage = ins.switchStage(2);
+            brickGenerator = ins.ChooseSpawner(currentStage);
+        }
+        else if(other.CompareTag("Stage3"))
+        {
+            currentStage = ins.switchStage(3);
+            brickGenerator = ins.ChooseSpawner(currentStage);
+        }
     }
 
     private void CheckBridge()
@@ -51,31 +68,26 @@ public class BrickController : MonoBehaviour
             Debug.DrawRay(placePoint.position, playerModel.TransformDirection(Vector3.down) * hit.distance, Color.magenta);
             PlacedBrick checkBrick = hit.collider.GetComponent<PlacedBrick>();
 
-            // if(hit.collider.CompareTag("Test"))
-            // {
-            //     hit.collider.GetComponent<ColliderTest>().TurnColliOn();
-            // }
-
             if(hit.collider.CompareTag("Bridge"))
             {
-                if(brickCount > 0)
+                brideWay = hit.collider.gameObject;
+                if(brickCount > 0 && placedBrickCount < 12)
                 {
                     PlaceBrick(hit);
                 }
                 else
                 {
-                    if(isBot)
-                    {
-                        botController.Place_CollectBrick();
-                    }
+                    brideWay.GetComponent<BridgeWay>().TurnOnStartWall();
                     placedBrickCount = hit.collider.GetComponent<BridgeWay>().bricksPlaced;
-                    hit.collider.GetComponent<BridgeWay>().TurnOnStartWall();
-                    // BlockFallOff(hit);
                 }
             }
-            else
+
+            if(hit.collider.CompareTag("Ground"))
             {
-                brideWay.GetComponent<BridgeWay>().TurnOffStartWall();
+                if(brideWay != null)
+                {
+                    brideWay.GetComponent<BridgeWay>().TurnOffStartWall();
+                } 
             }
 
             if(checkBrick != null && checkBrick.colorName != selectedColorName && brickCount <= 0)
@@ -96,15 +108,18 @@ public class BrickController : MonoBehaviour
     public void UpdateBrickHolder()
     {
         Vector3 newPositon = new Vector3(carryPoint.position.x, carryPoint.position.y + brickCount*0.05f, carryPoint.position.z);
-        Transform brick = Instantiate(normalBrick, newPositon, playerModel.rotation, carryPoint);
+        GameObject brick = poolingCarryPoint.GetObject();
+        brick.transform.position = newPositon;
+        brick.transform.rotation = playerModel.rotation;
         brick.GetComponent<Renderer>().material.SetColor("_Color", selectedColor);
+        brick.SetActive(true);
         brickCount++;
     }
 
     private void RemovedTopBrick()
     {
-        GameObject lastChild = carryPoint.GetChild(brickCount - 1).gameObject;
-        Destroy(lastChild);
+        GameObject lastChild = carryPoint.GetChild(carryPoint.childCount - brickCount).gameObject;
+        poolingCarryPoint.ReturnObject(lastChild);
         brickCount--;
     }
 
@@ -116,12 +131,12 @@ public class BrickController : MonoBehaviour
 
         Vector3 placeBrickPos = new Vector3(bridgePos.x, bridgePos.y + (placedBrickCount * placedBrickSizey), 
                                                 bridgePos.z + (placedBrickCount * placedBrickSizez) - 1.025f);
-        // Vector3 placeBrickPos = bridgePos;
 
-        Transform placedBrick = Instantiate(placedBrickPrefab, placeBrickPos, placedBrickPrefab.rotation, placeBrickHolder);
-
+        GameObject placedBrick = poolingPlacedBrick.GetObject();
+        placedBrick.transform.position = placeBrickPos;
         placedBrick.GetComponent<Renderer>().material.SetColor("_Color", selectedColor);
         placedBrick.GetComponent<PlacedBrick>().colorName = selectedColorName;
+        placedBrick.SetActive(true);
 
         hit.collider.GetComponent<BridgeWay>().bricksPlaced++;
 
@@ -129,19 +144,8 @@ public class BrickController : MonoBehaviour
 
         brickGenerator.GeneratedRemovedBrick();
 
-        Debug.Log("placeBrickPos: " + placeBrickPos);
         hit.collider.GetComponent<BridgeWay>().MoveStartWall(placeBrickPos + new Vector3(.0f, .0f, 0.6f));
-
-        if(isBot)
-        {
-            botController.UpdateMesh();
-        }
     }
-
-    // private void checkStage(RaycastHit hit)
-    // {
-
-    // }
 
     private void BlockMoveOnOtherBrick(RaycastHit hit)
     {

@@ -140,8 +140,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 12, z: 1}
-  m_Center: {x: 0, y: 5.9, z: 9.226584e-10}
+  m_Size: {x: 1, y: 14.799207, z: 0.91367847}
+  m_Center: {x: 0, y: 7.2996044, z: 0.043159872}
 --- !u!1 &8772569423378263421
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,8 +237,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 12, z: 1}
-  m_Center: {x: 0, y: 5.9, z: 0}
+  m_Size: {x: 1, y: 14.926172, z: 0.91973376}
+  m_Center: {x: 0, y: 7.3630924, z: 0.040133543}
 --- !u!1 &8772569423768320372
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,8 +283,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3502795, y: 0.030684944, z: 1.4368826}
-  m_Center: {x: 0.006110698, y: -0.4846575, z: -0.36687276}
+  m_Size: {x: 0.3502795, y: 0.030684944, z: 1.4433602}
+  m_Center: {x: 0.006110698, y: -0.48465753, z: -0.36363396}
 --- !u!114 &8772569423768320374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bricksPlaced: 0
   startWall: {fileID: 2071765876}
+  boxCollider: {fileID: 0}
 --- !u!1 &8772569423970772075
 GameObject:
   m_ObjectHideFlags: 0

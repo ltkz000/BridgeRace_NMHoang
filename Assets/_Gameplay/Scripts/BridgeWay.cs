@@ -8,19 +8,25 @@ public class BridgeWay : MonoBehaviour
 
     public Transform startWall;
 
+    public BoxCollider boxCollider;
+
+    private void Start() {
+        boxCollider = startWall.GetComponent<BoxCollider>();
+    }
+
     public void MoveStartWall(Vector3 newPos)
     {
         startWall.position = newPos;
-        startWall.GetComponent<BoxCollider>().enabled = true;
+        boxCollider.enabled = true;
     }
 
     public void TurnOnStartWall()
     {
-        startWall.GetComponent<BoxCollider>().enabled = true;
+        boxCollider.enabled = true;
     }
 
     public void TurnOffStartWall()
     {
-        startWall.GetComponent<BoxCollider>().enabled = false;
+        boxCollider.enabled = false;
     }
 }

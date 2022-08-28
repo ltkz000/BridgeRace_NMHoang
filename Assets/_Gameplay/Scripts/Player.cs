@@ -9,9 +9,6 @@ public class Player : MonoBehaviour
     public Animator animator;
     [SerializeField] private Transform playerModel;
     [SerializeField] private float playerSpeed = 2.0f;
-    // [SerializeField] private float rotationSpeed;
-    // Variables
-    // private float currentGravity;
     private Vector3 move;
     [SerializeField] private bool isBot;
 
@@ -19,7 +16,6 @@ public class Player : MonoBehaviour
     {
         playerInput = new PlayerInput();
         controller = GetComponent<CharacterController>();
-        // currentGravity = .0f;
     }
 
     private void OnEnable()

@@ -2,25 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerStage { Stage1, Stage2, Stage3 }
+public enum Stage
+{
+    Stage1,
+    Stage2,
+    Stage3
+}
 
 public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] BrickGenerator spawner1;
     [SerializeField] BrickGenerator spawner2;
     [SerializeField] BrickGenerator spawner3;
-    public void UpdatePlayerStage(PlayerStage playerStage)
+
+    public Stage switchStage(int stage)
     {
-        switch(playerStage)
+        switch(stage)
         {
-            case PlayerStage.Stage1:
-                break;
-            case PlayerStage.Stage2:
-                break;
-            case PlayerStage.Stage3:
-                break;
+            case 1:
+                return Stage.Stage1;
+            case 2:
+                return Stage.Stage2;
+            case 3:
+                return Stage.Stage3;
             default:
-                break;
+                return Stage.Stage1;      
+        }
+    }
+
+    public BrickGenerator ChooseSpawner(Stage currentStage)
+    {
+        if(currentStage == Stage.Stage1)
+        {
+            return spawner1;
+        }
+        else if(currentStage == Stage.Stage2)
+        {
+            return spawner2;
+        }
+        else
+        {
+            return spawner3;
         }
     }
 }

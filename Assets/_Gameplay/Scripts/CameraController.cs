@@ -6,8 +6,8 @@ public class CameraController : MonoBehaviour
 {
     public static CameraController instance;
     public Transform playerObj;
-    [SerializeField] private float height;
-    [SerializeField] private float distance;
+    [SerializeField] Vector3 offset;
+    public float smoothSpeed = 0.125f;
     
     private void Awake() 
     {
@@ -19,7 +19,8 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate() 
     {
-        Vector3 cameraoffset = new Vector3(0, height, distance);
-        transform.position = playerObj.position + cameraoffset;   
+        Vector3 desiredPos = playerObj.position + offset;
+        Vector3 smoothPos = Vector3.Lerp(transform.position, desiredPos, smoothSpeed);
+        transform.position = smoothPos; 
     }
 }

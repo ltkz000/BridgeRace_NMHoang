@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BotController : MonoBehaviour
+public class BotControll : MonoBehaviour
 {
-    private BrickGenerator brickGenerator;
+    [SerializeField] private BrickGenerator brickGenerator;
     [SerializeField] private NavMeshAgent navMeshAgent;
-    [SerializeField] private PlayerBrickController brickController;
+    [SerializeField] private BotBrickControll botBrickControll;
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform finalPoint;
     [SerializeField] private Animator animator;
+    BrickGenerator.SpawnedBricks[] spawnedBricks;
     private int selectedColorCount;
     private Vector3 finalPos;
     int rdNumber;
 
-
-    private void Start() 
+    void Start()
     {
-        brickGenerator = FindObjectOfType<BrickGenerator>();
+        spawnedBricks = brickGenerator.spawnedBricks;
 
         StartCoroutine(FirstCollect());
         finalPos = finalPoint.position;
@@ -28,44 +28,51 @@ public class BotController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        BrickGenerator.SpawnedBricks[] spawnedBricks = brickGenerator.spawnedBricks;
-
         for(int i = 0; i < spawnedBricks.Length; i++)
         {
-            if(spawnedBricks[i].colorName == brickController.selectedColorName)
+            if(spawnedBricks[i].colorName == botBrickControll.selectedColorName)
             {
                 selectedColorCount++;
             }
         }
 
-        if(brickController.brickCount < selectedColorCount)
+        if(botBrickControll.brickCount < selectedColorCount)
         {
             for(int i = 0; i < spawnedBricks.Length; i++)
             {
-                if(spawnedBricks[i].isRemoved != true && spawnedBricks[i].colorName == brickController.selectedColorName)
+                if(spawnedBricks[i].isRemoved != true && spawnedBricks[i].colorName == botBrickControll.selectedColorName)
                 {
                     navMeshAgent.SetDestination(spawnedBricks[i].position);
-                    // animator.SetBool("isRunning", navMeshAgent.velocity.magnitude > 0.01f);
+                    animator.SetBool("isRunning", navMeshAgent.velocity.magnitude > 0.01f);
                     StopCoroutine(FirstCollect());
                 }
             }
         }
     }
 
+    private void Update() {
+        spawnedBricks = brickGenerator.spawnedBricks;
+    }
+
     public void CollectBrick()
     {
-        BrickGenerator.SpawnedBricks[] spawnedBricks = brickGenerator.spawnedBricks;
+        selectedColorCount = 0;
 
-        // rdNumber = Random.Range(0, selectedColorCount);
+        for(int i = 0; i < spawnedBricks.Length; i++)
+        {
+            if(spawnedBricks[i].colorName == botBrickControll.selectedColorName)
+            {
+                selectedColorCount++;
+            }
+        }
 
-        if(brickController.brickCount < selectedColorCount)
+        if(botBrickControll.brickCount < selectedColorCount - 3)
         {
             for(int i = 0; i < spawnedBricks.Length; i++)
             {
-                if(spawnedBricks[i].isRemoved != true && spawnedBricks[i].colorName == brickController.selectedColorName)
+                if(spawnedBricks[i].isRemoved != true && spawnedBricks[i].colorName == botBrickControll.selectedColorName)
                 {
                     navMeshAgent.SetDestination(spawnedBricks[i].position);
-                    // animator.SetBool("isRunning", navMeshAgent.velocity.magnitude > 0.01f);
                     return;
                 }
             }
@@ -78,19 +85,18 @@ public class BotController : MonoBehaviour
 
     public void Place_CollectBrick()
     {
-        if(brickController.brickCount == 0)
+        if(botBrickControll.brickCount == 0)
         {
             CollectBrick();
         }
         else
         {
             navMeshAgent.SetDestination(finalPos);
-            // animator.SetBool("isRunning", navMeshAgent.velocity.magnitude > 0.01f);
         }
     }
 
-    public void UpdateMesh()
-    {
-        UnityEditor.AI.NavMeshBuilder.BuildNavMesh();
-    }
+    // public void UpdateMesh()
+    // {
+    //     UnityEditor.AI.NavMeshBuilder.BuildNavMesh();
+    // }
 }
