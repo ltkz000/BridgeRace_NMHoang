@@ -1,28 +1,47 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
-
-public enum GameState { MainMenu, GamePlay, Pause}
+using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
-    private GameState gameState;
+    //[SerializeField] UserData userData;
+    //[SerializeField] CSVData csv;
+    //private static GameState gameState = GameState.MainMenu;
 
-    private void Awake()
+    // Start is called before the first frame update
+    protected void Awake()
     {
+        //base.Awake();
+        Input.multiTouchEnabled = false;
         Application.targetFrameRate = 60;
-        Input.multiTouchEnabled = true;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
-        //init data
+        int maxScreenHeight = 1280;
+        float ratio = (float)Screen.currentResolution.width / (float)Screen.currentResolution.height;
+        if (Screen.currentResolution.height > maxScreenHeight)
+        {
+            Screen.SetResolution(Mathf.RoundToInt(ratio * (float)maxScreenHeight), maxScreenHeight, true);
+        }
+
+        //csv.OnInit();
+        //userData?.OnInitData();
+
+        //ChangeState(GameState.MainMenu);
+
+        UIManager.Ins.OpenUI(UIID.UICMainMenu);
+        
     }
 
-    public void ChangeState(GameState gameState)
-    {
-        this.gameState = gameState;
-    }
+    //public static void ChangeState(GameState state)
+    //{
+    //    gameState = state;
+    //}
 
-    public bool IsState(GameState gameState)
-    {
-        return this.gameState == gameState;
-    }
+    //public static bool IsState(GameState state)
+    //{
+    //    return gameState == state;
+    //}
+  
 }

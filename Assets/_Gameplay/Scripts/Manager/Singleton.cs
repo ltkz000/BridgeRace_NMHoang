@@ -1,28 +1,33 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T ins;
+    private static T m_Ins;
 
     public static T Ins
     {
         get
         {
-            if(ins == null)
+            if (m_Ins == null)
             {
-                ins = FindObjectOfType<T>();
-            }
+                // Find singleton
+                m_Ins = FindObjectOfType<T>();
 
-            if(ins == null)
-            {   
-                GameObject gameObject = new GameObject();
-                ins = gameObject.AddComponent<T>();
-                gameObject.name = typeof(T).ToString();
-            }
+                // Create new instance if one doesn't already exist.
+                if (m_Ins == null)
+                {
+                    // Need to create a new GameObject to attach the singleton to.
+                    var singletonObject = new GameObject();
+                    m_Ins = singletonObject.AddComponent<T>();
+                    singletonObject.name = typeof(T).ToString() + " (Singleton)";
 
-            return ins;
+                }
+
+            }
+            return m_Ins;
         }
     }
+
 }

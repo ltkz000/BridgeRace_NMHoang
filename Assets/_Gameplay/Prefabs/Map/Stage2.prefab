@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 802528187782512623}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Stage2
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -222,7 +222,7 @@ Transform:
   - {fileID: 4389409719289026224}
   - {fileID: 3511904987371305995}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &802528188883600237
 GameObject:
@@ -295,7 +295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802528188913370167}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.56, y: 0.61, z: 0.91}
+  m_LocalPosition: {x: 1.56, y: 0.61, z: 1.186}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

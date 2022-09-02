@@ -1,101 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class BotBrickControll : MonoBehaviour
+public class PlayerTestBrick : MonoBehaviour
 {
-    public GameObject brideWay;
     public Pooling spawnerPooling;
     public BrickGenerator brickGenerator;
-    
 
-    [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private AIController aIController;
+
     [SerializeField] private Transform playerModel;
-    [SerializeField] private Animator animator;
     [SerializeField] private Transform carryPoint;
     [SerializeField] private Transform placePoint;
     [SerializeField] private Transform placedBrickPrefab;
-    [SerializeField] Transform startPoint;
-    [SerializeField] Transform finishPoint;
     [SerializeField] private Color selectedColor;
     [SerializeField] private string selectedColorName;
+    [SerializeField] private GameObject brideWay;
+    
 
-
-    private int check;
-    private int brickCount = 0;
-    private float placedBrickSizey, placedBrickSizez;
     private Pooling poolingCarryPoint;
-    private int selectedColorCount;
+    private float placedBrickSizey, placedBrickSizez;
+    private int brickCount = 0;
 
 
-    private void Start()
+    private void Start() 
     {
         poolingCarryPoint = carryPoint.GetComponent<Pooling>();
 
         placedBrickSizey = placedBrickPrefab.GetComponent<Renderer>().bounds.size.y;
         placedBrickSizez = placedBrickPrefab.GetComponent<Renderer>().bounds.size.z;
-        // selectedColorCount = Random.Range(4,8);
-
-        selectedColorCount = brickGenerator.GetSelectedColor(selectedColorName);
     }
 
-    private void Update() {
+    private void FixedUpdate() 
+    {
         Debug.Log("brickCount: " + brickCount);
         CheckBridge();
     }
-
-    public void BotCollect()
-    {
-        Debug.Log("Collect");
-
-        for(int i = brickGenerator.spawnedBricks.Length - 1; i >= 0; i--)
-        {
-            if(brickGenerator.spawnedBricks[i].isRemoved != true && brickGenerator.spawnedBricks[i].colorName == selectedColorName)
-            {
-                check++;
-                agent.SetDestination(brickGenerator.spawnedBricks[i].position);
-                animator.SetBool("isRunning", agent.velocity.magnitude > 0.01f);
-            }
-        }
-        
-        if(brickCount == selectedColorCount)
-        {
-            aIController.switchState(BotState.Build);
-        }
-    }
-
-    public void PickedUp(GameObject other)
-    {
-        Brick brick = other.GetComponent<Brick>();
-        if(brick.colorName == selectedColorName)
-            {
-                brickGenerator.RemovePickedBrick(brick.brickNumber);
-                spawnerPooling.ReturnObject(other.gameObject);
-                UpdateBrickHolder();
-            }
-    }
-
-    public void BotBuild()
-    {
-        agent.SetDestination(startPoint.position);
-
-        if(brickCount == 0)
-        {
-            aIController.switchState(BotState.Collect);
-            selectedColorCount = Random.Range(4,8);
-        }
-    }
-
-     private void OnTriggerEnter(Collider other) 
-    {
-        if(other.CompareTag(selectedColorName))
-        {
-            agent.SetDestination(finishPoint.position);
-        }
-    }
-
 
     private void CheckBridge()
     {
@@ -104,7 +43,7 @@ public class BotBrickControll : MonoBehaviour
         {
             Debug.DrawRay(placePoint.position, playerModel.TransformDirection(Vector3.down) * hit.distance, Color.magenta);
 
-            if(hit.collider.CompareTag("PlacedBrick"))
+            if(hit.collider.CompareTag("Ground"))
             {
                 Debug.Log("ground");
                 if(brideWay != null)
@@ -131,10 +70,8 @@ public class BotBrickControll : MonoBehaviour
             RemovedTopBrick();
 
             brickGenerator.GeneratedRemovedBrick();
-
-            agent.SetDestination(finishPoint.position);
         }
-        else if(brickCount == 0)
+        else
         {
             brideWay.GetComponent<BridgeWay>().MoveStartWall(placedBrick.transform.position + new Vector3(.0f, .0f, 0.5f));
         }
@@ -161,6 +98,18 @@ public class BotBrickControll : MonoBehaviour
             }
     }
 
+    public void PickedUp(GameObject other)
+    {
+        Brick brick = other.GetComponent<Brick>();
+
+        if(brick.colorName == selectedColorName)
+            {
+                brickGenerator.RemovePickedBrick(brick.brickNumber);
+                spawnerPooling.ReturnObject(other.gameObject);
+                UpdateBrickHolder();
+            }
+    }
+
     public void UpdateBrickHolder()
     {
         Vector3 newPositon = new Vector3(carryPoint.position.x, carryPoint.position.y + brickCount*0.05f, carryPoint.position.z);
@@ -181,6 +130,6 @@ public class BotBrickControll : MonoBehaviour
 
     public void Hit(GameObject player)
     {
-
+        
     }
 }

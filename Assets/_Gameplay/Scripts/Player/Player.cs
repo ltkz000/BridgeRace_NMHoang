@@ -10,8 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform playerModel;
     [SerializeField] private float playerSpeed = 2.0f;
     private Vector3 move;
-    [SerializeField] private bool isBot;
-
+    
     private void Awake() 
     {
         playerInput = new PlayerInput();
