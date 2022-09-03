@@ -103,11 +103,20 @@ public class PlayerTestBrick : MonoBehaviour
         Brick brick = other.GetComponent<Brick>();
 
         if(brick.colorName == selectedColorName)
-            {
-                brickGenerator.RemovePickedBrick(brick.brickNumber);
-                spawnerPooling.ReturnObject(other.gameObject);
-                UpdateBrickHolder();
-            }
+        {
+            brickGenerator.RemovePickedBrick(brick.brickNumber);
+            spawnerPooling.ReturnObject(other.gameObject);
+            UpdateBrickHolder();
+        }
+        else if(brick.colorName == null)
+        {
+
+        }
+    }
+
+    public void DropBrick()
+    {
+
     }
 
     public void UpdateBrickHolder()

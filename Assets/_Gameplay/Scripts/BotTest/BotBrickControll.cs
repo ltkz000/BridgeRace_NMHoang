@@ -132,7 +132,7 @@ public class BotBrickControll : MonoBehaviour
 
             brickGenerator.GeneratedRemovedBrick();
 
-            agent.SetDestination(finishPoint.position);
+            agent.SetDestination (finishPoint.position);
         }
         else if(brickCount == 0)
         {

@@ -50,12 +50,4 @@ public class CollectController : MonoBehaviour
             playerBrickController.ReplaceBrick(other.gameObject);
         }
     }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if(other.transform.CompareTag("FinishLine"))
-        {
-
-        }
-    }
 }

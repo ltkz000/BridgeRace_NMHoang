@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private PlayerInput playerInput;
-    private CharacterController controller;
-    public Animator animator;
+    [SerializeField] private Animator animator;
     [SerializeField] private Transform playerModel;
+    [SerializeField] PlayerTestBrick playerBrickController;
+    [SerializeField] private Collider collider;
     [SerializeField] private float playerSpeed = 2.0f;
+    
+
+    private PlayerInput playerInput;
+    private bool isMoveable;
+    private CharacterController controller;
     private Vector3 move;
     
     private void Awake() 
     {
         playerInput = new PlayerInput();
         controller = GetComponent<CharacterController>();
+
+        isMoveable = true;
     }
 
     private void OnEnable()
@@ -29,20 +36,23 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Vector2 movementInput = playerInput.CharacterControls.Move.ReadValue<Vector2>();
-
-        // gravityHandle();
-
-        move = new Vector3(movementInput.x, .0f, movementInput.y);
-        
-        controller.Move(move * Time.deltaTime * playerSpeed);
-
-        if(move != Vector3.zero)
+        if(isMoveable)
         {
-            playerModel.forward = move;
-        }
+            Vector2 movementInput = playerInput.CharacterControls.Move.ReadValue<Vector2>();
 
-        AnimationHandle();
+            // gravityHandle();
+
+            move = new Vector3(movementInput.x, .0f, movementInput.y);
+            
+            controller.Move(move * Time.deltaTime * playerSpeed);
+
+            if(move != Vector3.zero)
+            {
+                playerModel.forward = move;
+            }
+
+            AnimationHandle();
+        }
     }
 
     private void AnimationHandle()
@@ -56,6 +66,40 @@ public class Player : MonoBehaviour
         {
             animator.SetBool("isRunning", false);
         }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Debug.Log("HMmmm");
+        if(hit.collider.CompareTag("Fall"))
+        {
+            Debug.Log("Fall k'mon");
+            HitFall();
+        }
+    }
+
+    private void HitFall()
+    {
+        TriggerFall();
+        playerBrickController.DropBrick();
+    }
+
+    protected virtual void TriggerFall()
+    {
+        StartCoroutine(Fall());
+    }
+
+    private IEnumerator Fall()
+    {
+        isMoveable = false;
+        collider.enabled = false;
+
+        animator.SetTrigger("Fall");
+
+        yield return new WaitForSeconds(4.9f);
+
+        isMoveable = true;
+        collider.enabled = true;
     }
 }
 

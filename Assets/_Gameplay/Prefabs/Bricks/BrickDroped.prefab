@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 1074281666733097145}
   - component: {fileID: 2351564501289822800}
   - component: {fileID: 2847719548621422358}
-  - component: {fileID: -2893500675214826726}
-  - component: {fileID: -4039522249493099487}
+  - component: {fileID: 4677524627838831482}
+  - component: {fileID: 1829577810430329242}
+  - component: {fileID: -3561735015176887085}
   - component: {fileID: 2921883659850581647}
   m_Layer: 0
-  m_Name: BrickPickedUp
+  m_Name: BrickDroped
   m_TagString: normal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8176278038686179970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.35312578, y: 0.02, z: 0.0676}
-  m_LocalScale: {x: 0.1, y: 0.04, z: 0.05}
+  m_LocalScale: {x: 0.12783001, y: 0.04, z: 0.05904}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,7 +87,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-2893500675214826726
+--- !u!65 &4677524627838831482
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,9 +98,9 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.15, y: 1.3630556, z: 1.15}
-  m_Center: {x: 0, y: 0.18152848, z: 0}
---- !u!65 &-4039522249493099487
+  m_Size: {x: 1.15, y: 1.6059551, z: 1.15}
+  m_Center: {x: 0, y: 0.40297797, z: 0}
+--- !u!65 &1829577810430329242
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,6 +113,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &-3561735015176887085
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8176278038686179970}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &2921883659850581647
 MonoBehaviour:
   m_ObjectHideFlags: 0
