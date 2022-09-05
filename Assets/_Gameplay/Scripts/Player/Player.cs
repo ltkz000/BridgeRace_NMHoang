@@ -70,7 +70,6 @@ public class Player : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        Debug.Log("HMmmm");
         if(hit.collider.CompareTag("Fall"))
         {
             Debug.Log("Fall k'mon");

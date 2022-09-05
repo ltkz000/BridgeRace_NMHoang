@@ -1214,7 +1214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6458345878454285436
 Transform:
   m_ObjectHideFlags: 0
@@ -1262,7 +1262,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 0.33
-  m_Radius: 0.13
+  m_Radius: 0.11
   m_SlopeLimit: 45
   m_StepOffset: 0.1
   m_SkinWidth: 0.02
@@ -1313,12 +1313,14 @@ MonoBehaviour:
   spawnerPooling: {fileID: 0}
   brickGenerator: {fileID: 0}
   playerModel: {fileID: 2670759962670261474}
+  dropedBrickHolder: {fileID: 0}
   carryPoint: {fileID: 8667769817490650776}
   placePoint: {fileID: 7623239139647006097}
   placedBrickPrefab: {fileID: 5302839993543362414, guid: 9fcf8e229ba719a48a46b15db4eec430, type: 3}
   selectedColor: {r: 0.7647059, g: 0.17254902, b: 0.12941177, a: 0}
   selectedColorName: red
   brideWay: {fileID: 0}
+  brickCount: 0
 --- !u!1 &5988598035070795422
 GameObject:
   m_ObjectHideFlags: 0

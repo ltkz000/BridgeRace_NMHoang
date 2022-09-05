@@ -16,6 +16,7 @@ TagManager:
   - green
   - normal
   - Fall
+  - gray
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Water
   - UI
   - Visible
-  - 
+  - Player
   - 
   - 
   - 

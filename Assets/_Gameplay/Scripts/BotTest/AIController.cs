@@ -46,6 +46,23 @@ public class AIController : MonoBehaviour
         }
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit) 
+    {
+        Brick brick = hit.collider.GetComponent<Brick>();
+
+        if(hit.collider.CompareTag("PlacedBrick"))
+        {
+            if(botBrickControll.brickCount > 0)
+            {
+                hit.collider.isTrigger = true;
+            }
+        }    
+        else if(hit.collider.CompareTag("normal"))
+        {
+            botBrickControll.PickedUp(hit.gameObject);
+        }
+    }
+
     private void OnTriggerEnter(Collider other) 
     {
         if(other.CompareTag("Stage1"))

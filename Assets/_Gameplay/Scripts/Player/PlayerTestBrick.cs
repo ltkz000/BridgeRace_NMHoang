@@ -9,6 +9,7 @@ public class PlayerTestBrick : MonoBehaviour
 
 
     [SerializeField] private Transform playerModel;
+    [SerializeField] private Transform dropedBrickHolder;
     [SerializeField] private Transform carryPoint;
     [SerializeField] private Transform placePoint;
     [SerializeField] private Transform placedBrickPrefab;
@@ -16,14 +17,18 @@ public class PlayerTestBrick : MonoBehaviour
     [SerializeField] private string selectedColorName;
     [SerializeField] private GameObject brideWay;
     
-
+    private Pooling poolingDropedBrick;
     private Pooling poolingCarryPoint;
+    private PlacedBrick placedBrickScript;
     private float placedBrickSizey, placedBrickSizez;
-    private int brickCount = 0;
+    public int brickCount = 0;
+    private float force = 100f;
+    private float subForce = 20f;
 
 
     private void Start() 
     {
+        poolingDropedBrick = dropedBrickHolder.GetComponent<Pooling>();
         poolingCarryPoint = carryPoint.GetComponent<Pooling>();
 
         placedBrickSizey = placedBrickPrefab.GetComponent<Renderer>().bounds.size.y;
@@ -33,59 +38,44 @@ public class PlayerTestBrick : MonoBehaviour
     private void FixedUpdate() 
     {
         Debug.Log("brickCount: " + brickCount);
-        CheckBridge();
-    }
-
-    private void CheckBridge()
-    {
-        RaycastHit hit;
-        if(Physics.Raycast(placePoint.position, playerModel.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
-        {
-            Debug.DrawRay(placePoint.position, playerModel.TransformDirection(Vector3.down) * hit.distance, Color.magenta);
-
-            if(hit.collider.CompareTag("Ground"))
-            {
-                Debug.Log("ground");
-                if(brideWay != null)
-                {
-                    brideWay.GetComponent<BridgeWay>().TurnOffStartWall();
-                } 
-            }
-        }
-        else
-        {
-            Debug.DrawRay(placePoint.position, placePoint.TransformDirection(Vector3.down) * 1000, Color.yellow);
-        }
-    }
+    } 
 
     public void PlaceBrick(GameObject placedBrick)
     {
-        if(brickCount > 0)
+        placedBrickScript = placedBrick.GetComponent<PlacedBrick>();
+
+        if(brickCount > 0 && placedBrickScript.colorName != selectedColorName)
         {
-            placedBrick.tag = selectedColorName;
-            placedBrick.GetComponent<MeshRenderer>().enabled = true;
-            placedBrick.GetComponent<MeshRenderer>().material.SetColor("_Color", selectedColor);
-            placedBrick.GetComponent<PlacedBrick>().colorName = selectedColorName;
+            placedBrickScript.colorName = selectedColorName;
+            placedBrickScript.meshRenderer.enabled = true;
+            placedBrickScript.meshRenderer.material.SetColor("_Color", selectedColor);
+            placedBrickScript.colorName = selectedColorName;
 
             RemovedTopBrick();
 
             brickGenerator.GeneratedRemovedBrick();
         }
+        else if(placedBrickScript.colorName == selectedColorName)
+        {
+
+        }
         else
         {
-            brideWay.GetComponent<BridgeWay>().MoveStartWall(placedBrick.transform.position + new Vector3(.0f, .0f, 0.5f));
+            placedBrickScript.boxCollider.isTrigger = false;
         }
     }
 
     public void ReplaceBrick(GameObject other)
     {
-        if(other.tag != selectedColorName)
+        placedBrickScript = other.GetComponent<PlacedBrick>(); 
+
+        if(placedBrickScript.colorName != selectedColorName)
             {
                 if(brickCount > 0)
                 {
-                    other.tag = selectedColorName;
-                    other.GetComponent<MeshRenderer>().material.SetColor("_Color", selectedColor);
-                    other.GetComponent<PlacedBrick>().colorName = selectedColorName;
+                    placedBrickScript.colorName = selectedColorName;
+                    placedBrickScript.meshRenderer.material.SetColor("_Color", selectedColor);
+                    placedBrickScript.colorName = selectedColorName;
 
                     RemovedTopBrick();
 
@@ -93,7 +83,7 @@ public class PlayerTestBrick : MonoBehaviour
                 }
                 else
                 {
-                    brideWay.GetComponent<BridgeWay>().MoveStartWall(other.transform.position + new Vector3(.0f, .0f, 0.5f));
+                    placedBrickScript.boxCollider.isTrigger = false;
                 }
             }
     }
@@ -108,15 +98,12 @@ public class PlayerTestBrick : MonoBehaviour
             spawnerPooling.ReturnObject(other.gameObject);
             UpdateBrickHolder();
         }
-        else if(brick.colorName == null)
+        else if(brick.colorName == "gray")
         {
-
+            poolingDropedBrick.ReturnObject(other.gameObject);
+            brickGenerator.GeneratedRemovedBrick();
+            UpdateBrickHolder();
         }
-    }
-
-    public void DropBrick()
-    {
-
     }
 
     public void UpdateBrickHolder()
@@ -130,15 +117,26 @@ public class PlayerTestBrick : MonoBehaviour
         brickCount++;
     }
 
+    public void DropBrick()
+    {
+        while(brickCount > 0)
+        {
+            GameObject lastChild = carryPoint.GetChild(carryPoint.childCount - brickCount).gameObject;
+            GameObject dropedBrick = poolingDropedBrick.GetObject();
+            dropedBrick.transform.position = lastChild.transform.position;
+            dropedBrick.transform.rotation = dropedBrick.transform.rotation;
+            dropedBrick.SetActive(true);
+            dropedBrick.GetComponent<Rigidbody>().AddForce(playerModel.transform.forward * (force + (brickCount * subForce)));
+
+            poolingCarryPoint.ReturnObject(lastChild);
+            brickCount--;
+        }
+    }
+
     public void RemovedTopBrick()
     {
         GameObject lastChild = carryPoint.GetChild(carryPoint.childCount - brickCount).gameObject;
         poolingCarryPoint.ReturnObject(lastChild);
         brickCount--;
-    }
-
-    public void Hit(GameObject player)
-    {
-        
     }
 }
