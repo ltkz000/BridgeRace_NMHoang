@@ -5,134 +5,64 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Numerics;
 
-public enum UIID
+[System.Serializable]
+public class UICanvasRef
 {
-    UICGamePlay = 0,
-    UICBlockRaycast = 1,
-
-    UICMainMenu = 2,
-
-    UICSetting = 3,
-    UICFail = 4,
-    UICVictory = 5,
+    public UICanvasID ID;
+    public UICanvas Canvas;
 }
-
 
 public class UIManager : Singleton<UIManager>
 {
-    
-    private Dictionary<UIID, UICanvas> UICanvas = new Dictionary<UIID, UICanvas>();
+    public Dictionary<UICanvasID, UICanvas> UICanvasReferenceDict = new Dictionary<UICanvasID, UICanvas>();
+    [NonReorderable]
+    public List<UICanvasRef> UIRefList;
+    public Dictionary<UICanvasID, UICanvas> UICanvasDict = new Dictionary<UICanvasID, UICanvas>();
+    public Transform UICanvasParentTrans;
 
-    public Transform CanvasParentTF;
-
-    #region Canvas
-
-    public bool IsOpenedUI(UIID ID)
+    protected void Awake()
     {
-        return UICanvas.ContainsKey(ID) && UICanvas[ID] != null && UICanvas[ID].gameObject.activeInHierarchy;
-    }
-
-    public UICanvas GetUI(UIID ID)
-    {
-        if (!UICanvas.ContainsKey(ID) || UICanvas[ID] == null)
+        foreach(var item in UIRefList)
         {
-            UICanvas canvas = Instantiate(Resources.Load<UICanvas>("UI/" + ID.ToString()), CanvasParentTF);
-            UICanvas[ID] = canvas;
-        }
-
-        return UICanvas[ID];
-    } 
-    
-    public T GetUI<T>(UIID ID) where T : UICanvas
-    {
-        return GetUI(ID) as T;
-    }
-
-    public UICanvas OpenUI(UIID ID)
-    {
-        UICanvas canvas = GetUI(ID);
-
-        canvas.Setup();
-        canvas.Open();
-
-        return canvas;
-    }  
-    
-    public T OpenUI<T>(UIID ID) where T : UICanvas
-    {
-        return OpenUI(ID) as T;
-    }
-
-    public bool IsOpened(UIID ID)
-    {
-        return UICanvas.ContainsKey(ID) && UICanvas[ID] != null;
-    }
-
-    #endregion
-
-    #region Back Button
-
-    private Dictionary<UICanvas, UnityAction> BackActionEvents = new Dictionary<UICanvas, UnityAction>();
-    private List<UICanvas> backCanvas = new List<UICanvas>();
-    UICanvas BackTopUI {
-        get
-        {
-            UICanvas canvas = null;
-            if (backCanvas.Count > 0)
+            if(item.Canvas != null)
             {
-                canvas = backCanvas[backCanvas.Count - 1];
+                UICanvasReferenceDict.Add(item.ID, item.Canvas);
             }
-
-            return canvas;
         }
     }
 
-
-    private void LateUpdate()
+    public UICanvas GetUICanvas(UICanvasID id)
     {
-        if (Input.GetKey(KeyCode.Escape) && BackTopUI != null)
+        if(!UICanvasDict.ContainsKey(id) || UICanvasDict[id] == null)
         {
-            BackActionEvents[BackTopUI]?.Invoke();
+            UICanvas canvas = Instantiate(UICanvasReferenceDict[id], UICanvasParentTrans);
+            UICanvasDict[id] = canvas;
         }
+        return UICanvasDict[id];
     }
 
-    public void PushBackAction(UICanvas canvas, UnityAction action)
+    public UICanvas OpenUI(UICanvasID id)
     {
-        if (!BackActionEvents.ContainsKey(canvas))
+        UICanvas canvas = GetUICanvas(id);
+        canvas.Open();
+        return canvas;
+    }
+
+    public T OpenUI<T>(UICanvasID id) where T : UICanvas
+    {
+        return OpenUI(id) as T;
+    }
+
+    public void CloseUI(UICanvasID id)
+    {
+        if(IsUICanvasOpened(id))
         {
-            BackActionEvents.Add(canvas, action);
+            GetUICanvas(id).Close();
         }
     }
 
-    public void AddBackUI(UICanvas canvas)
+    public bool IsUICanvasOpened(UICanvasID id)
     {
-        if (!backCanvas.Contains(canvas))
-        {
-            backCanvas.Add(canvas);
-        }
+        return UICanvasDict.ContainsKey(id) && UICanvasDict[id] != null && UICanvasDict[id].gameObject.activeInHierarchy;
     }
-
-    public void RemoveBackUI(UICanvas canvas)
-    {
-        backCanvas.Remove(canvas);
-    }
-
-    /// <summary>
-    /// CLear backey when comeback index UI canvas
-    /// </summary>
-    public void ClearBackKey()
-    {
-        backCanvas.Clear();
-    }
-
-    #endregion
-
-    public void CloseUI(UIID ID)
-    {
-        if (IsOpened(ID))
-        {
-            GetUI(ID).Close();
-        }
-    }
-
 }

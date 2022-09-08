@@ -22,8 +22,8 @@ public class PlayerTestBrick : MonoBehaviour
     private PlacedBrick placedBrickScript;
     private float placedBrickSizey, placedBrickSizez;
     public int brickCount = 0;
-    private float force = 100f;
-    private float subForce = 20f;
+    private float force = 50f;
+    private float subForce = 10f;
 
 
     private void Start() 
@@ -34,11 +34,6 @@ public class PlayerTestBrick : MonoBehaviour
         placedBrickSizey = placedBrickPrefab.GetComponent<Renderer>().bounds.size.y;
         placedBrickSizez = placedBrickPrefab.GetComponent<Renderer>().bounds.size.z;
     }
-
-    private void FixedUpdate() 
-    {
-        Debug.Log("brickCount: " + brickCount);
-    } 
 
     public void PlaceBrick(GameObject placedBrick)
     {
@@ -126,7 +121,7 @@ public class PlayerTestBrick : MonoBehaviour
             dropedBrick.transform.position = lastChild.transform.position;
             dropedBrick.transform.rotation = dropedBrick.transform.rotation;
             dropedBrick.SetActive(true);
-            dropedBrick.GetComponent<Rigidbody>().AddForce(playerModel.transform.forward * (force + (brickCount * subForce)));
+            dropedBrick.GetComponent<Rigidbody>().AddForce(playerModel.transform.forward * (force + (brickCount * subForce)) * (-1));
 
             poolingCarryPoint.ReturnObject(lastChild);
             brickCount--;
@@ -138,5 +133,15 @@ public class PlayerTestBrick : MonoBehaviour
         GameObject lastChild = carryPoint.GetChild(carryPoint.childCount - brickCount).gameObject;
         poolingCarryPoint.ReturnObject(lastChild);
         brickCount--;
+    }
+
+    public void DropAllBrick()
+    {
+        while(brickCount != 0)
+        {
+            GameObject lastChild = carryPoint.GetChild(carryPoint.childCount - brickCount).gameObject;
+            poolingCarryPoint.ReturnObject(lastChild);
+            brickCount--;
+        }
     }
 }

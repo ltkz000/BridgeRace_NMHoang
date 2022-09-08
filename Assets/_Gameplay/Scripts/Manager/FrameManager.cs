@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { MainMenu, GamePlay, Pause}
+public enum GameState { MainMenu, GamePlay, Pause, Result}
 
-public class FrameManager : MonoBehaviour
+public class FrameManager : Singleton<FrameManager>
 {
-    private GameState gameState;
+    public GameState currentgameState = GameState.MainMenu;
 
     private void Awake()
     {
         Application.targetFrameRate = 60;
         Input.multiTouchEnabled = true;
 
-        //init data
+        currentgameState = GameState.MainMenu;
     }
 
     public void ChangeState(GameState gameState)
     {
-        this.gameState = gameState;
+        currentgameState = gameState;
     }
 
     public bool IsState(GameState gameState)
     {
-        return this.gameState == gameState;
+        return this.currentgameState == gameState;
     }
 }

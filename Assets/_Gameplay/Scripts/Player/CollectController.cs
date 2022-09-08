@@ -39,18 +39,21 @@ public class CollectController : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Stage1"))
         {
+            playerBrickController.brickGenerator.GeneratedRemovedBrick();
             currentStage = ins.switchStage(1);
             playerBrickController.brickGenerator = ins.ChooseSpawner(currentStage);
             playerBrickController.spawnerPooling = playerBrickController.brickGenerator.GetComponent<Pooling>();
         }
         else if(other.CompareTag("Stage2"))
         {
+            playerBrickController.brickGenerator.GeneratedRemovedBrick();
             currentStage = ins.switchStage(2);
             playerBrickController.brickGenerator = ins.ChooseSpawner(currentStage);
             playerBrickController.spawnerPooling = playerBrickController.brickGenerator.GetComponent<Pooling>();
         }
         else if(other.CompareTag("Stage3"))
         {
+            playerBrickController.brickGenerator.GeneratedRemovedBrick();
             currentStage = ins.switchStage(3);
             playerBrickController.brickGenerator = ins.ChooseSpawner(currentStage);
             playerBrickController.spawnerPooling = playerBrickController.brickGenerator.GetComponent<Pooling>();

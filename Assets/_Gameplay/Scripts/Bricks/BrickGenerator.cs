@@ -14,6 +14,7 @@ public class BrickGenerator : MonoBehaviour
     private int line = 8;
     private int xOrder = 0;
     private int count;
+    private int rdNumber;
     [SerializeField] private float brickDistance;
 
     private float xPosition;
@@ -49,6 +50,7 @@ public class BrickGenerator : MonoBehaviour
 
     public int GetSelectedColor(string selectedColorName)
     {
+        count = 0;
         for(int i = 0; i < spawnedBricks.Length; i++)
         {
             if(selectedColorName == spawnedBricks[i].colorName)
@@ -56,7 +58,9 @@ public class BrickGenerator : MonoBehaviour
                 count++;
             }
         }
-        return count;
+        rdNumber = Random.Range(count - 1, count);
+
+        return rdNumber;
     }
 
     private void CreateBrick()

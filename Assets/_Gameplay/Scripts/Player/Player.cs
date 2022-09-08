@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     private PlayerInput playerInput;
     private bool isMoveable;
+    private bool isWin;
     private CharacterController controller;
     private Vector3 move;
     
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
         controller = GetComponent<CharacterController>();
 
         isMoveable = true;
+        isWin = false;
     }
 
     private void OnEnable()
@@ -68,19 +70,46 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnTriggerEnter(Collider other) 
     {
-        if(hit.collider.CompareTag("Fall"))
+        if(other.CompareTag("Finish"))
         {
-            Debug.Log("Fall k'mon");
-            HitFall();
+            isMoveable = false;
+            playerBrickController.DropAllBrick();
+            animator.SetTrigger("Win");
+            UIManager.Ins.OpenUI<CanvasVictory>(UICanvasID.Result).SetResult(isWin);
+            FrameManager.Ins.ChangeState(GameState.Result);
         }
     }
 
-    private void HitFall()
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        TriggerFall();
-        playerBrickController.DropBrick();
+        if(hit.collider.CompareTag("Player"))
+        {
+            BotBrickControll _playerBrickController = hit.collider.GetComponent<BotBrickControll>();
+
+            if(_playerBrickController != null)
+            {
+                HitFall(_playerBrickController);
+            }
+        }
+    }
+
+    private void HitFall(BotBrickControll _playerBrickController)
+    {
+        int temp = playerBrickController.brickCount - _playerBrickController.brickCount;
+
+        Debug.Log("Temp: " + temp);
+
+        if(temp == 0)
+        {
+            return;
+        }
+        else if(temp < 0)
+        {
+            TriggerFall();
+            playerBrickController.DropBrick();
+        }
     }
 
     protected virtual void TriggerFall()

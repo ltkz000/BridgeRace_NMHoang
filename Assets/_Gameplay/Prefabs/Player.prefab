@@ -1210,11 +1210,11 @@ GameObject:
   - component: {fileID: 841106768}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6458345878454285436
 Transform:
   m_ObjectHideFlags: 0
@@ -1262,7 +1262,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 0.33
-  m_Radius: 0.11
+  m_Radius: 0.12
   m_SlopeLimit: 45
   m_StepOffset: 0.1
   m_SkinWidth: 0.02
@@ -1284,7 +1284,7 @@ MonoBehaviour:
   playerModel: {fileID: 2670759962670261474}
   playerBrickController: {fileID: 841106768}
   collider: {fileID: 3103030639236470806}
-  playerSpeed: 1.5
+  playerSpeed: 2
 --- !u!114 &8289207618344198881
 MonoBehaviour:
   m_ObjectHideFlags: 0

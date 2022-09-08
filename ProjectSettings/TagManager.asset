@@ -10,13 +10,9 @@ TagManager:
   - Stage3
   - Ground
   - PlacedBrick
-  - red
-  - blue
-  - yellow
-  - green
   - normal
   - Fall
-  - gray
+  - LastStage
   layers:
   - Default
   - TransparentFX
@@ -25,7 +21,7 @@ TagManager:
   - Water
   - UI
   - Visible
-  - Player
+  - Joystick
   - 
   - 
   - 

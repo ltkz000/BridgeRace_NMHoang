@@ -11,21 +11,36 @@ public enum Stage
 
 public class LevelManager : Singleton<LevelManager>
 {
-    [SerializeField] BrickGenerator spawner1;
-    [SerializeField] BrickGenerator spawner2;
-    [SerializeField] BrickGenerator spawner3;
+    [SerializeField] private BrickGenerator spawner1;
+    [SerializeField] private BrickGenerator spawner2;
+    [SerializeField] private BrickGenerator spawner3;
+    public BridgeWay[] bridgeWays1;
+    public BridgeWay[] bridgeWays2;
+    public BridgeWay[] bridgeWays3;
+    private BridgeWay[] currentBridgeWays;
+
+    private int randomNum;
+
+    private void Start() 
+    {
+        currentBridgeWays = bridgeWays1;
+    }
 
     public Stage switchStage(int stage)
     {
         switch(stage)
         {
             case 1:
+                currentBridgeWays = bridgeWays1;
                 return Stage.Stage1;
             case 2:
+                currentBridgeWays = bridgeWays2;
                 return Stage.Stage2;
             case 3:
+                currentBridgeWays = bridgeWays3;
                 return Stage.Stage3;
             default:
+                currentBridgeWays = bridgeWays1;
                 return Stage.Stage1;      
         }
     }
@@ -44,5 +59,12 @@ public class LevelManager : Singleton<LevelManager>
         {
             return spawner3;
         }
+    }
+
+    public BridgeWay ChooseBridge()
+    {
+        randomNum = Random.Range(0, currentBridgeWays.Length);
+    
+        return currentBridgeWays[randomNum];
     }
 }

@@ -8,9 +8,8 @@ public class BotBrickControll : MonoBehaviour
     public GameObject brideWay;
     public Pooling spawnerPooling;
     public BrickGenerator brickGenerator;
+    public NavMeshAgent agent;
     
-
-    [SerializeField] private NavMeshAgent agent;
     [SerializeField] private AIController aIController;
     [SerializeField] private Transform playerModel;
     [SerializeField] private Transform dropedBrickHolder;
@@ -18,8 +17,8 @@ public class BotBrickControll : MonoBehaviour
     [SerializeField] private Transform carryPoint;
     [SerializeField] private Transform placePoint;
     [SerializeField] private Transform placedBrickPrefab;
-    [SerializeField] Transform startPoint;
-    [SerializeField] Transform finishPoint;
+    [SerializeField] private Transform finishLine;
+    [SerializeField] private BridgeWay bridgeWay;
     [SerializeField] private Color selectedColor;
     [SerializeField] private string selectedColorName;
 
@@ -31,8 +30,8 @@ public class BotBrickControll : MonoBehaviour
     private float placedBrickSizey, placedBrickSizez;
     private int selectedColorCount;
     public int brickCount = 0;
-    private float force = 100f;
-    private float subForce = 20f;
+    private float force = 50f;
+    private float subForce = 10f;
 
     private void Start()
     {
@@ -46,14 +45,11 @@ public class BotBrickControll : MonoBehaviour
         selectedColorCount = brickGenerator.GetSelectedColor(selectedColorName);
     }
 
-    private void Update() {
-        Debug.Log("brickCount: " + brickCount);
-    }
-
     public void BotCollect()
     {
         Debug.Log("Collect");
 
+        // selectedColorCount = brickGenerator.GetSelectedColor(selectedColorName);
         for(int i = brickGenerator.spawnedBricks.Length - 1; i >= 0; i--)
         {
             if(brickGenerator.spawnedBricks[i].isRemoved != true && brickGenerator.spawnedBricks[i].colorName == selectedColorName)
@@ -64,29 +60,49 @@ public class BotBrickControll : MonoBehaviour
             }
         }
         
-        if(brickCount == selectedColorCount)
+        if(brickCount >= brickGenerator.GetSelectedColor(selectedColorName))
         {
+            StartCoroutine(waitBuild());   
+            bridgeWay = LevelManager.Ins.ChooseBridge(); 
             aIController.switchState(BotState.Build);
+        }
+    }
+
+    private IEnumerator waitBuild()
+    {
+        agent.SetDestination(bridgeWay.startPoint.position);
+        yield return new WaitForSeconds(5f);
+    }
+
+    public void BotIdle()
+    {
+        // animator.SetTrigger("Idle");
+
+        if(FrameManager.Ins.currentgameState == GameState.GamePlay)
+        {
+            aIController.switchState(BotState.Collect);
         }
     }
 
     public void BotBuild()
     {
-        agent.SetDestination(startPoint.position);
+        agent.SetDestination(bridgeWay.finishPoint.position);
 
         if(brickCount == 0)
         {
+            StartCoroutine(waitBuild());
             aIController.switchState(BotState.Collect);
-            selectedColorCount = Random.Range(4,8);
         }
     }
 
-     private void OnTriggerEnter(Collider other) 
+    public void BotFall()
     {
-        if(other.CompareTag(selectedColorName))
-        {
-            agent.SetDestination(finishPoint.position);
-        }
+
+    }
+
+    public void BotWin()
+    {
+        agent.SetDestination(finishLine.position);
     }
 
     public void PlaceBrick(GameObject placedBrick)
@@ -95,16 +111,14 @@ public class BotBrickControll : MonoBehaviour
 
         if(brickCount > 0 && placedBrickScript.colorName != selectedColorName)
         {
-            placedBrick.tag = selectedColorName;
-            placedBrick.GetComponent<MeshRenderer>().enabled = true;
-            placedBrick.GetComponent<MeshRenderer>().material.SetColor("_Color", selectedColor);
-            placedBrick.GetComponent<PlacedBrick>().colorName = selectedColorName;
+            placedBrickScript.colorName = selectedColorName;
+            placedBrickScript.meshRenderer.enabled = true;
+            placedBrickScript.meshRenderer.material.SetColor("_Color", selectedColor);
+            placedBrickScript.colorName = selectedColorName;
 
             RemovedTopBrick();
 
             brickGenerator.GeneratedRemovedBrick();
-
-            agent.SetDestination (finishPoint.position);
         }
         else if(placedBrickScript.colorName == selectedColorName)
         {
@@ -189,5 +203,15 @@ public class BotBrickControll : MonoBehaviour
         GameObject lastChild = carryPoint.GetChild(carryPoint.childCount - brickCount).gameObject;
         poolingCarryPoint.ReturnObject(lastChild);
         brickCount--;
+    }
+
+    public void DropAllBrick()
+    {
+        while(brickCount != 0)
+        {
+            GameObject lastChild = carryPoint.GetChild(carryPoint.childCount - brickCount).gameObject;
+            poolingCarryPoint.ReturnObject(lastChild);
+            brickCount--;
+        }
     }
 }

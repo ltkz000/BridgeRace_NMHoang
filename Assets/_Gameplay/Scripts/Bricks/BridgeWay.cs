@@ -6,27 +6,7 @@ public class BridgeWay : MonoBehaviour
 {
     public int bricksPlaced;
 
-    public Transform startWall;
+    public Transform startPoint;
 
-    public BoxCollider boxCollider;
-
-    private void Start() {
-        boxCollider = startWall.GetComponent<BoxCollider>();
-    }
-
-    public void MoveStartWall(Vector3 newPos)
-    {
-        startWall.position = newPos;
-        boxCollider.enabled = true;
-    }
-
-    public void TurnOnStartWall()
-    {
-        boxCollider.enabled = true;
-    }
-
-    public void TurnOffStartWall()
-    {
-        boxCollider.enabled = false;
-    }
+    public Transform finishPoint;
 }
