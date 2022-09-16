@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Transform playerModel;
-    [SerializeField] PlayerTestBrick playerBrickController;
+    [SerializeField] BrickController playerBrickController;
     [SerializeField] private Collider collider;
     [SerializeField] private float playerSpeed = 2.0f;
     
@@ -59,24 +59,25 @@ public class Player : MonoBehaviour
 
     private void AnimationHandle()
     {
-        bool isRunning = animator.GetBool("isRunning");
-        if(move != Vector3.zero && !isRunning)
+        bool isRunning = animator.GetBool(ConstValue.ANIM_RUNNING_BOOL);
+        if(move.magnitude != Vector3.zero.magnitude && !isRunning)
         {
-            animator.SetBool("isRunning", true);
+            animator.SetBool(ConstValue.ANIM_RUNNING_BOOL, true);
         }
-        else if(move == Vector3.zero && isRunning)
+        else if(move.magnitude == Vector3.zero.magnitude && isRunning)
         {
-            animator.SetBool("isRunning", false);
+            animator.SetBool(ConstValue.ANIM_RUNNING_BOOL, false);
         }
     }
 
     private void OnTriggerEnter(Collider other) 
     {
-        if(other.CompareTag("Finish"))
+        if(other.CompareTag(ConstValue.FINISH_TAG))
         {
             isMoveable = false;
             playerBrickController.DropAllBrick();
-            animator.SetTrigger("Win");
+            animator.SetTrigger(ConstValue.WIN_TAG);
+            isWin = true;
             UIManager.Ins.OpenUI<CanvasVictory>(UICanvasID.Result).SetResult(isWin);
             FrameManager.Ins.ChangeState(GameState.Result);
         }
@@ -84,9 +85,9 @@ public class Player : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(hit.collider.CompareTag("Player"))
+        if(hit.collider.CompareTag(ConstValue.PLAYER_TAG))
         {
-            BotBrickControll _playerBrickController = hit.collider.GetComponent<BotBrickControll>();
+            BrickController _playerBrickController = hit.collider.GetComponent<BrickController>();
 
             if(_playerBrickController != null)
             {
@@ -95,11 +96,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void HitFall(BotBrickControll _playerBrickController)
+    private void HitFall(BrickController _playerBrickController)
     {
         int temp = playerBrickController.brickCount - _playerBrickController.brickCount;
-
-        Debug.Log("Temp: " + temp);
 
         if(temp == 0)
         {
@@ -122,7 +121,7 @@ public class Player : MonoBehaviour
         isMoveable = false;
         collider.enabled = false;
 
-        animator.SetTrigger("Fall");
+        animator.SetTrigger(ConstValue.ANIM_FALL_TRIGGER);
 
         yield return new WaitForSeconds(4.9f);
 

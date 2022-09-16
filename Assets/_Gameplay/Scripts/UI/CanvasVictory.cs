@@ -12,11 +12,11 @@ public class CanvasVictory : UICanvas
     {
         if(val)
         {
-            resultText.text = "VICTORY";
+            resultText.text = ConstValue.VICTORY_TEXT;
         }
         else
         {
-            resultText.text = "LOSE";
+            resultText.text = ConstValue.LOSE_TEXT;
         }
     }
 

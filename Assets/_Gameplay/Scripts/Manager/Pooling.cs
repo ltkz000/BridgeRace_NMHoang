@@ -21,13 +21,16 @@ public class Pooling : MonoBehaviour
         }
     }
 
-    public GameObject GetObject()
+    public GameObject GetObject(Vector3 position)
     {
         int totalFree = freeList.Count;
         if(totalFree == 0 && !expanable) return null;
         else if(totalFree == 0) GenerateNewObject();
 
         GameObject g = freeList[freeList.Count - 1];
+        g.transform.position = position;
+        g.SetActive(true);
+
         freeList.RemoveAt(freeList.Count - 1);
         usedList.Add(g);
         return g;

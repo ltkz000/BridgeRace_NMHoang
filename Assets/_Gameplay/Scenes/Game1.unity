@@ -252,6 +252,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1449154310}
     - target: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickController
+      value: 
+      objectReference: {fileID: 143631272}
+    - target: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: selectedColor.b
       value: 0.1254902
       objectReference: {fileID: 0}
@@ -279,6 +283,34 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5d57cd667598faf4789fb03c8102aecd, type: 2}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickGenerator
+      value: 
+      objectReference: {fileID: 1449154311}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: spawnerPooling
+      value: 
+      objectReference: {fileID: 1449154310}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.b
+      value: 0.14524738
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.g
+      value: 0.6880106
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.r
+      value: 0.754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: dropedBrickHolder
+      value: 
+      objectReference: {fileID: 1757411641}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColorName
+      value: yellow
+      objectReference: {fileID: 0}
     - target: {fileID: 5797603395864323897, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_Name
       value: Bot Yellow
@@ -293,7 +325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6574948962089254275, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.59
+      value: 1.543
       objectReference: {fileID: 0}
     - target: {fileID: 6574948962089254275, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -333,6 +365,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+--- !u!114 &143631272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+  m_PrefabInstance: {fileID: 143631271}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305f7a8fd024b7b4eb3a7f8f4d4e82c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &200713487
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +493,10 @@ PrefabInstance:
       propertyPath: dropedBrickHolder
       value: 
       objectReference: {fileID: 1757411641}
+    - target: {fileID: 2634747454977966453, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+      propertyPath: playerBrickController
+      value: 
+      objectReference: {fileID: 442190429}
     - target: {fileID: 5975001234641284806, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
       propertyPath: m_Name
       value: Player
@@ -460,7 +507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6458345878454285436, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.925
+      value: 0.178
       objectReference: {fileID: 0}
     - target: {fileID: 6458345878454285436, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -468,7 +515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6458345878454285436, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.074
+      value: -2.138
       objectReference: {fileID: 0}
     - target: {fileID: 6458345878454285436, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -498,8 +545,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6474578655417431330, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+      propertyPath: brickGenerator
+      value: 
+      objectReference: {fileID: 1449154311}
+    - target: {fileID: 6474578655417431330, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+      propertyPath: spawnerPooling
+      value: 
+      objectReference: {fileID: 1449154310}
+    - target: {fileID: 6474578655417431330, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+      propertyPath: dropedBrickHolder
+      value: 
+      objectReference: {fileID: 1757411641}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+--- !u!114 &442190429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6474578655417431330, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+  m_PrefabInstance: {fileID: 442190428}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305f7a8fd024b7b4eb3a7f8f4d4e82c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &623223386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -528,13 +598,53 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1449154310}
     - target: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickController
+      value: 
+      objectReference: {fileID: 1700443723}
+    - target: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: dropedBrickHolder
       value: 
       objectReference: {fileID: 1757411641}
+    - target: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColorName
+      value: blue
+      objectReference: {fileID: 0}
     - target: {fileID: 2068574182, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: brickGenerator
       value: 
       objectReference: {fileID: 1449154311}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickGenerator
+      value: 
+      objectReference: {fileID: 1449154311}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: spawnerPooling
+      value: 
+      objectReference: {fileID: 1449154310}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.b
+      value: 0.5283019
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.g
+      value: 0.138348
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.r
+      value: 0.09668918
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: dropedBrickHolder
+      value: 
+      objectReference: {fileID: 1757411641}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColorName
+      value: blue
+      objectReference: {fileID: 0}
     - target: {fileID: 5797603395864323897, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_Name
       value: Bot Blue
@@ -545,7 +655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6574948962089254275, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.28426492
+      value: 0.875
       objectReference: {fileID: 0}
     - target: {fileID: 6574948962089254275, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1057,6 +1167,38 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f4901e013bbc3354c9a366c9a0e84ba0, type: 2}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickGenerator
+      value: 
+      objectReference: {fileID: 1449154311}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: spawnerPooling
+      value: 
+      objectReference: {fileID: 1449154310}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.b
+      value: 0.09388466
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.g
+      value: 0.5849056
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.r
+      value: 0.06290491
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: dropedBrickHolder
+      value: 
+      objectReference: {fileID: 1757411641}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColorName
+      value: green
+      objectReference: {fileID: 0}
     - target: {fileID: 5797603395864323897, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_Name
       value: Bot Green
@@ -1071,7 +1213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6574948962089254275, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5699999
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 6574948962089254275, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1251,6 +1393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8021d56e9c87ff48867479d712eeb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transform: {fileID: 1463007697}
   playerObj: {fileID: 12101045}
   offset: {x: 0, y: 1.5, z: -2}
   smoothSpeed: 0.15
@@ -1469,6 +1612,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1700443723 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+  m_PrefabInstance: {fileID: 623223386}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305f7a8fd024b7b4eb3a7f8f4d4e82c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1757411639
 GameObject:
   m_ObjectHideFlags: 0

@@ -187,7 +187,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &71207235 stripped
 MonoBehaviour:
@@ -376,8 +376,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.72995543, y: -2.480716, z: 1.9703963}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2048461887}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -475,6 +474,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &698318636 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+  m_PrefabInstance: {fileID: 2068574171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 758c5a258ab84b7469d9aa4db450948a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +583,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 416019427}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: brideWay
@@ -596,6 +606,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1842142477}
     - target: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickController
+      value: 
+      objectReference: {fileID: 728512487}
+    - target: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: selectedColor.b
       value: 0.14509805
       objectReference: {fileID: 0}
@@ -616,13 +630,49 @@ PrefabInstance:
       value: green
       objectReference: {fileID: 0}
     - target: {fileID: 2068574182, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: botSetupState
+      value: 
+      objectReference: {fileID: 1642846360}
+    - target: {fileID: 2068574182, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: brickGenerator
       value: 
       objectReference: {fileID: 71207235}
+    - target: {fileID: 2068574182, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickController
+      value: 
+      objectReference: {fileID: 728512487}
     - target: {fileID: 2446751480285593936, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f4901e013bbc3354c9a366c9a0e84ba0, type: 2}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickGenerator
+      value: 
+      objectReference: {fileID: 71207235}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: spawnerPooling
+      value: 
+      objectReference: {fileID: 1842142477}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.b
+      value: 0.14509805
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.r
+      value: 0.11764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: dropedBrickHolder
+      value: 
+      objectReference: {fileID: 1258125575}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColorName
+      value: green
+      objectReference: {fileID: 0}
     - target: {fileID: 5797603395864323897, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_Name
       value: Bot Green
@@ -633,19 +683,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6574948962089254275, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6574948962089254275, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.2999554
+      value: 1.5699999
       objectReference: {fileID: 0}
     - target: {fileID: 6574948962089254275, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.479616
+      value: -0.0011000633
       objectReference: {fileID: 0}
     - target: {fileID: 6574948962089254275, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.0983963
+      value: -2.128
       objectReference: {fileID: 0}
     - target: {fileID: 6574948962089254275, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -677,6 +727,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+--- !u!114 &728512487 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+  m_PrefabInstance: {fileID: 728512486}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305f7a8fd024b7b4eb3a7f8f4d4e82c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &841106773 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6458345878454285436, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
@@ -813,6 +874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8021d56e9c87ff48867479d712eeb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transform: {fileID: 963194228}
   playerObj: {fileID: 841106773}
   offset: {x: 0, y: 1.5, z: -2}
   smoothSpeed: 0.15
@@ -839,6 +901,14 @@ PrefabInstance:
       propertyPath: dropedBrickHolder
       value: 
       objectReference: {fileID: 1258125575}
+    - target: {fileID: 2634747454977966453, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+      propertyPath: playerBrickController
+      value: 
+      objectReference: {fileID: 1112840764}
+    - target: {fileID: 3103030639236470806, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+      propertyPath: m_StepOffset
+      value: 0.07
+      objectReference: {fileID: 0}
     - target: {fileID: 5975001234641284806, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
       propertyPath: m_Name
       value: Player
@@ -887,8 +957,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6474578655417431330, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+      propertyPath: brickGenerator
+      value: 
+      objectReference: {fileID: 71207235}
+    - target: {fileID: 6474578655417431330, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+      propertyPath: spawnerPooling
+      value: 
+      objectReference: {fileID: 1842142477}
+    - target: {fileID: 6474578655417431330, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+      propertyPath: dropedBrickHolder
+      value: 
+      objectReference: {fileID: 1258125575}
+    - target: {fileID: 8289207618344198881, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+      propertyPath: brickController
+      value: 
+      objectReference: {fileID: 1112840764}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+--- !u!114 &1112840764 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6474578655417431330, guid: a551da5aa5d90944eb8d60a2d7d70ac0, type: 3}
+  m_PrefabInstance: {fileID: 969696823}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305f7a8fd024b7b4eb3a7f8f4d4e82c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1114205876
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,8 +1071,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1642846360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+  m_PrefabInstance: {fileID: 728512486}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 758c5a258ab84b7469d9aa4db450948a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1651106564 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 802528189795780251, guid: c7a45b5c42d35d840b00782705428b18, type: 3}
@@ -1015,6 +1123,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1842142477}
     - target: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickController
+      value: 
+      objectReference: {fileID: 1750876563}
+    - target: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: selectedColor.b
       value: 0.1254902
       objectReference: {fileID: 0}
@@ -1035,13 +1147,49 @@ PrefabInstance:
       value: yellow
       objectReference: {fileID: 0}
     - target: {fileID: 2068574182, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: botSetupState
+      value: 
+      objectReference: {fileID: 1794849905}
+    - target: {fileID: 2068574182, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: brickGenerator
       value: 
       objectReference: {fileID: 71207235}
+    - target: {fileID: 2068574182, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickController
+      value: 
+      objectReference: {fileID: 1750876563}
     - target: {fileID: 2446751480285593936, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5d57cd667598faf4789fb03c8102aecd, type: 2}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickGenerator
+      value: 
+      objectReference: {fileID: 71207235}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: spawnerPooling
+      value: 
+      objectReference: {fileID: 1842142477}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.b
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.g
+      value: 0.69803923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.r
+      value: 0.7529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: dropedBrickHolder
+      value: 
+      objectReference: {fileID: 1258125575}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColorName
+      value: yellow
+      objectReference: {fileID: 0}
     - target: {fileID: 5797603395864323897, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_Name
       value: Bot Yellow
@@ -1096,6 +1244,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+--- !u!114 &1750876563 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+  m_PrefabInstance: {fileID: 1750876562}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305f7a8fd024b7b4eb3a7f8f4d4e82c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1794849905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+  m_PrefabInstance: {fileID: 1750876562}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 758c5a258ab84b7469d9aa4db450948a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1800364631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1271,7 +1441,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1920517485
 GameObject:
@@ -1342,7 +1512,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2037068013
 GameObject:
@@ -1388,11 +1558,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentgameState: 0
---- !u!4 &2048461887 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6574948962089254275, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
-  m_PrefabInstance: {fileID: 728512486}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2068574171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1421,16 +1586,64 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1842142477}
     - target: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickController
+      value: 
+      objectReference: {fileID: 2068574172}
+    - target: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: dropedBrickHolder
       value: 
       objectReference: {fileID: 1258125575}
+    - target: {fileID: 2068574181, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColorName
+      value: blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068574182, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: botSetupState
+      value: 
+      objectReference: {fileID: 698318636}
     - target: {fileID: 2068574182, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: brickGenerator
       value: 
       objectReference: {fileID: 71207235}
+    - target: {fileID: 2068574182, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickController
+      value: 
+      objectReference: {fileID: 2068574172}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: brickGenerator
+      value: 
+      objectReference: {fileID: 71207235}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: spawnerPooling
+      value: 
+      objectReference: {fileID: 1842142477}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.b
+      value: 0.6431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.g
+      value: 0.20392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColor.r
+      value: 0.14901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: dropedBrickHolder
+      value: 
+      objectReference: {fileID: 1258125575}
+    - target: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: selectedColorName
+      value: blue
+      objectReference: {fileID: 0}
     - target: {fileID: 5797603395864323897, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_Name
       value: Bot Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 5797603395864323897, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6574948962089254275, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
       propertyPath: m_RootOrder
@@ -1478,6 +1691,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+--- !u!114 &2068574172 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5021352835575486682, guid: 8829017f81b5cea4f9c1289da2587e4b, type: 3}
+  m_PrefabInstance: {fileID: 2068574171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305f7a8fd024b7b4eb3a7f8f4d4e82c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2081850468 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 802528188432382722, guid: c7a45b5c42d35d840b00782705428b18, type: 3}

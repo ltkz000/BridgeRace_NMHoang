@@ -58,7 +58,7 @@ public class BrickGenerator : MonoBehaviour
                 count++;
             }
         }
-        rdNumber = Random.Range(count - 1, count);
+        rdNumber = Random.Range(count-3, count);
 
         return rdNumber;
     }
@@ -78,10 +78,8 @@ public class BrickGenerator : MonoBehaviour
             {
                 position = new Vector3(xPosition + xOrder * brickDistance, startPoint.y, zPosition);
             }
-            GameObject createdBrick = spawnerPooling.GetObject();
-            createdBrick.transform.position = position;
+            GameObject createdBrick = spawnerPooling.GetObject(position);
             createdBrick.transform.SetParent(transform);
-            createdBrick.SetActive(true);
 
             //giveColor
             GiveColor(createdBrick, i);
@@ -122,10 +120,8 @@ public class BrickGenerator : MonoBehaviour
         {
             if(spawnedBricks[i].isRemoved == true)
             {
-                GameObject createdBrick = spawnerPooling.GetObject();
-                createdBrick.transform.position = spawnedBricks[i].position;
+                GameObject createdBrick = spawnerPooling.GetObject(spawnedBricks[i].position);
                 createdBrick.transform.SetParent(transform);
-                createdBrick.SetActive(true);
 
                 createdBrick.GetComponent<Renderer>().material.SetColor("_Color", spawnedBricks[i].color);
                 createdBrick.GetComponent<Brick>().colorName = spawnedBricks[i].colorName;

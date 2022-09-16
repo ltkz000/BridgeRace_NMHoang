@@ -1178,6 +1178,8 @@ GameObject:
   - component: {fileID: 2068574174}
   - component: {fileID: 2068574181}
   - component: {fileID: 2068574182}
+  - component: {fileID: 5021352835575486682}
+  - component: {fileID: 16790170277501729}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Player
@@ -1284,22 +1286,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758c5a258ab84b7469d9aa4db450948a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brideWay: {fileID: 0}
-  spawnerPooling: {fileID: 0}
-  brickGenerator: {fileID: 0}
   agent: {fileID: 2068574174}
+  brickGenerator: {fileID: 0}
+  brickController: {fileID: 5021352835575486682}
   aIController: {fileID: 2068574182}
-  playerModel: {fileID: 2850282049314286877}
-  dropedBrickHolder: {fileID: 0}
-  animator: {fileID: 999453777492371449}
-  carryPoint: {fileID: 8850792474279870311}
-  placePoint: {fileID: 7734195681191308398}
-  placedBrickPrefab: {fileID: 5302839993543362414, guid: 9fcf8e229ba719a48a46b15db4eec430, type: 3}
   finishLine: {fileID: 0}
   bridgeWay: {fileID: 0}
-  selectedColor: {r: 0.17254902, g: 0.12156863, b: 0.81960785, a: 0}
-  selectedColorName: blue
-  brickCount: 0
+  animator: {fileID: 999453777492371449}
+  selectedColorName: 
 --- !u!114 &2068574182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1312,10 +1306,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb3f75965ba63f54aa0ae683ce715c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brickGenerator: {fileID: 0}
-  botBrickControll: {fileID: 2068574181}
+  brickController: {fileID: 5021352835575486682}
+  botSetupState: {fileID: 2068574181}
   collider: {fileID: 2068574175}
   animator: {fileID: 999453777492371449}
+--- !u!114 &5021352835575486682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5797603395864323897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305f7a8fd024b7b4eb3a7f8f4d4e82c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerPooling: {fileID: 0}
+  brickGenerator: {fileID: 0}
+  playerModel: {fileID: 2850282049314286877}
+  dropedBrickHolder: {fileID: 0}
+  carryPoint: {fileID: 8850792474279870311}
+  placedBrickPrefab: {fileID: 5302839993543362414, guid: 9fcf8e229ba719a48a46b15db4eec430, type: 3}
+  selectedColor: {r: 0, g: 0, b: 0, a: 0}
+  selectedColorName: 
+  placedBrickScript: {fileID: 5302839993543362417, guid: 9fcf8e229ba719a48a46b15db4eec430, type: 3}
+  brickCount: 0
+--- !u!114 &16790170277501729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5797603395864323897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e3da2fe6e7981041857de190bc6558f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brickController: {fileID: 5021352835575486682}
+  botSetupState: {fileID: 2068574181}
 --- !u!1 &5838347078266136652
 GameObject:
   m_ObjectHideFlags: 0

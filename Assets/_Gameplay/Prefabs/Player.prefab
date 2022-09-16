@@ -1206,8 +1206,8 @@ GameObject:
   - component: {fileID: 1099031756794621446}
   - component: {fileID: 3103030639236470806}
   - component: {fileID: 2634747454977966453}
-  - component: {fileID: 8289207618344198881}
-  - component: {fileID: 841106768}
+  - component: {fileID: 3249167074521594465}
+  - component: {fileID: 6474578655417431330}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1264,7 +1264,7 @@ CharacterController:
   m_Height: 0.33
   m_Radius: 0.12
   m_SlopeLimit: 45
-  m_StepOffset: 0.1
+  m_StepOffset: 0.07
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.17, z: 0}
@@ -1282,10 +1282,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1099031756794621446}
   playerModel: {fileID: 2670759962670261474}
-  playerBrickController: {fileID: 841106768}
+  playerBrickController: {fileID: 0}
   collider: {fileID: 3103030639236470806}
   playerSpeed: 2
---- !u!114 &8289207618344198881
+--- !u!114 &3249167074521594465
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1294,11 +1294,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5975001234641284806}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 566c625eda727e0409d914dc3c3847a7, type: 3}
+  m_Script: {fileID: 11500000, guid: bcfb065195e0ab24a8d523899dfe2605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBrickController: {fileID: 841106768}
---- !u!114 &841106768
+  brickController: {fileID: 6474578655417431330}
+--- !u!114 &6474578655417431330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1307,7 +1307,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5975001234641284806}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d30cbe4793329a946843f14d02c08dd9, type: 3}
+  m_Script: {fileID: 11500000, guid: 305f7a8fd024b7b4eb3a7f8f4d4e82c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnerPooling: {fileID: 0}
@@ -1315,11 +1315,10 @@ MonoBehaviour:
   playerModel: {fileID: 2670759962670261474}
   dropedBrickHolder: {fileID: 0}
   carryPoint: {fileID: 8667769817490650776}
-  placePoint: {fileID: 7623239139647006097}
   placedBrickPrefab: {fileID: 5302839993543362414, guid: 9fcf8e229ba719a48a46b15db4eec430, type: 3}
   selectedColor: {r: 0.7647059, g: 0.17254902, b: 0.12941177, a: 0}
   selectedColorName: red
-  brideWay: {fileID: 0}
+  placedBrickScript: {fileID: 5302839993543362417, guid: 9fcf8e229ba719a48a46b15db4eec430, type: 3}
   brickCount: 0
 --- !u!1 &5988598035070795422
 GameObject:

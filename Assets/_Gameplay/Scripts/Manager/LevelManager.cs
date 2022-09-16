@@ -26,17 +26,17 @@ public class LevelManager : Singleton<LevelManager>
         currentBridgeWays = bridgeWays1;
     }
 
-    public Stage switchStage(int stage)
+    public Stage switchStage(string stage)
     {
         switch(stage)
         {
-            case 1:
+            case ConstValue.STAGE1_TAG:
                 currentBridgeWays = bridgeWays1;
                 return Stage.Stage1;
-            case 2:
+            case ConstValue.STAGE2_TAG:
                 currentBridgeWays = bridgeWays2;
                 return Stage.Stage2;
-            case 3:
+            case ConstValue.STAGE3_TAG:
                 currentBridgeWays = bridgeWays3;
                 return Stage.Stage3;
             default:
